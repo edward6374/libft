@@ -6,12 +6,12 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 17:59:25 by vduchi            #+#    #+#              #
-#    Updated: 2023/08/29 18:18:07 by vduchi           ###   ########.fr        #
+#    Updated: 2023/09/03 14:18:09 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS_TO		=	srcs/to/ft_atoi.c
-SRCS_TO		=	srcs/to/ft_atol.c
+SRCS_TO		+=	srcs/to/ft_atol.c
 SRCS_TO		+=	srcs/to/ft_itoa.c
 SRCS_TO		+=	srcs/to/ft_tolower.c
 SRCS_TO		+=	srcs/to/ft_toupper.c
