@@ -6,7 +6,7 @@
 /*   By: vduchi <vduchi@student.42barcelon>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/29 18:26:08 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/09/03 13:16:50 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,10 +47,6 @@ int				ft_atoi(const char *str);
 char			*ft_itoa(int n);
 long long int	ft_atol(const char *str);
 
-/* ---			Mem funcs			--- */
-int		ft_memcmp(const void *s1, const void *s2, size_t n);
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
-
 /* ---			Dptr funcs			--- */
 int		ft_len_dptr(char **arr);
 void	ft_free_dptr(char **arr);
@@ -72,12 +68,15 @@ void	ft_bzero(void *s, size_t n);
 void	*ft_calloc(size_t count, size_t size);
 
 /* ---			Mem funcs			--- */
+int		ft_memcmp(const void *s1, const void *s2, size_t n);
 void	*ft_memset(void *b, int c, size_t len);
 void	*ft_memchr(const void *s, int c, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
 
 /* ---			Str funcs			--- */
+int		ft_strcmp(char *s1, char *s2);
+int		ft_strncmp(const char *s1, const char *s2, size_t n);
 size_t	ft_strlen(const char *s);
 size_t	ft_strcspn(const char *s, const char *reject);
 size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
