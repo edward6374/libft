@@ -6,7 +6,7 @@
 #    By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 17:59:25 by vduchi            #+#    #+#              #
-#    Updated: 2023/08/29 18:15:25 by vduchi           ###   ########.fr        #
+#    Updated: 2023/09/03 13:13:41 by vduchi           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,6 +16,7 @@ SRCS_STR	+=	srcs/str/ft_strdup.c
 SRCS_STR	+=	srcs/str/ft_strlen.c
 SRCS_STR	+=	srcs/str/ft_strchr.c
 SRCS_STR	+=	srcs/str/ft_strtok.c
+SRCS_STR	+=	srcs/str/ft_strcmp.c
 SRCS_STR	+=	srcs/str/ft_strrchr.c
 SRCS_STR	+=	srcs/str/ft_strlcpy.c
 SRCS_STR	+=	srcs/str/ft_strlcat.c
