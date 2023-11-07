@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelon>         +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/29 18:26:08 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/07 10:57:32 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-# include "gnl.h"
+#include "get_next_line.h"
 # include "printf.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -32,6 +32,7 @@ void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 void	ft_putendl_fd(char *s, int fd);
 int		ft_putstr_error(const char *s);
+void ft_message(int err, char *msg);
 
 /* ---			Is funcs			--- */
 int		ft_isalpha(int c);
@@ -55,6 +56,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_len_dptr(char **arr);
 void	ft_free_dptr(char **arr);
 void	ft_print_dptr(char **arr);
+char **ft_file_to_dptr(char *file, int line);
 
 /* ---			List funcs			--- */
 int		ft_lstsize(t_list *lst);

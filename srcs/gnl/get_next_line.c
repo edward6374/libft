@@ -3,122 +3,161 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/01 00:07:43 by vduchi            #+#    #+#             */
-/*   Updated: 2023/08/28 18:06:43 by vduchi           ###   ########.fr       */
+/*   Created: 2022/08/18 17:30:14 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/11/07 14:38:47 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "gnl.h"
+/* ╔════════════════════════════════════════════════════════════════════════╗ */
+/* ║                 https://github.com/nach131/42Barcelona                 ║ */
+/* ╚════════════════════════════════════════════════════════════════════════╝ */
 
-static char	*ft_update_chars(char *chars, int *check)
+#include "get_next_line.h"
+#include "libft.h"
+
+void ft_cut_tp(t_get *tp, int len_trim)
 {
-	int		len;
-	int		start;
+	char *str;
+	int len_tp;
 
-	len = -1;
-	start = 0;
-	if (!chars || !*check)
+	len_tp = ft_strlen(tp->content);
+	str = ft_strjoin(tp->content, "");
+	while (len_tp >= 0)
 	{
-		free(chars);
-		return (NULL);
+		tp->content[len_tp] = '\0';
+		len_tp--;
+	}
+	len_tp = 0;
+	while (str[len_trim] != '\0')
+	{
+		tp->content[len_tp] = str[len_trim];
+		len_trim++;
+		len_tp++;
+	}
+	free(str);
+}
+
+void ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
+{
+	char *tmp_tp;
+
+	if (str && *line)
+	{
+		tmp_tp = (char *)ft_calloc(len_tp, sizeof(tmp_tp));
+		ft_memcpy(tmp_tp, tp->content, len_tp);
+		str = ft_strjoin(*line, "");
+		free(*line);
+		*line = ft_strjoin(str, tmp_tp);
+		free(tmp_tp);
+		free(str);
 	}
 	else
 	{
-		while (chars[++len] != '\0')
-		{
-			if (chars[len] == '\n' && start == 0)
-				start = len + 1;
-		}
-		if (start == 0)
-			return (NULL);
-		chars = ft_realloc(chars, start, len - start);
+		len_tp = ft_strlen(tp->content);
+		str = ft_strjoin(*line, "");
+		free(*line);
+		*line = ft_strjoin(str, tp->content);
+		free(str);
 	}
-	return (chars);
+	ft_cut_tp(tp, len_tp);
 }
 
-static char	*ft_get_next_line(char *chars, int *check)
+int ft_tp_line(t_get *tp, char **line)
 {
-	int		i;
-	int		len;
-	char	*str;
+	char *str;
+	int len_tp;
 
-	i = -1;
-	len = 0;
-	if (!chars)
-		return (NULL);
-	while (chars[++i] != '\0')
+	str = ft_strchr(tp->content, '\n');
+	len_tp = str - tp->content + 1;
+	if (str && !*line)
 	{
-		if (chars[i] == '\n')
-		{
-			*check = *check + 1;
-			break ;
-		}
-		len++;
+		str = (char *)ft_calloc(len_tp, sizeof(str));
+		ft_memcpy(str, tp->content, len_tp);
+		ft_cut_tp(tp, len_tp);
+		*line = str;
 	}
-	str = (char *)malloc(sizeof(char) * (len + *check + 1));
-	if (!str)
-		return (NULL);
-	i = -1;
-	while (++i < (len + *check))
-		str[i] = chars[i];
-	str[i] = '\0';
-	return (str);
+	else if (str && *line)
+		ft_tp_line_ex(tp, &(*line), len_tp, str);
+	else if (*tp->content && *line != NULL)
+		ft_tp_line_ex(tp, &(*line), len_tp, str);
+	else
+	{
+		len_tp = ft_strlen(tp->content);
+		*line = ft_strjoin(tp->content, "");
+		ft_cut_tp(tp, len_tp);
+	}
+	return (1);
 }
 
-static char	*ft_read_file(char *chars, int fd)
+int ft_buffer(int fd, t_get *tp, char **line)
 {
-	int		n_b;
-	char	*buf;
-
-	buf = (char *)malloc(sizeof(char) * (BUFFER_SIZE + 1));
-	if (!buf)
-		return (NULL);
-	buf[0] = '\0';
-	while (!ft_strchr(buf, '\n'))
-	{
-		n_b = read(fd, buf, BUFFER_SIZE);
-		if (n_b <= 0 && chars[0] != '\0')
-			break ;
-		else if (n_b <= 0 && buf[0] == '\0')
-		{
-			free(buf);
-			free(chars);
-			return (NULL);
-		}
-		buf[n_b] = '\0';
-		chars = ft_strjoin(chars, buf);
-	}
-	free(buf);
-	return (chars);
+	if (!*tp->content)
+		tp->size_buf = read(fd, tp->content, BUFFER_SIZE);
+	if (tp->size_buf < 0)
+		return (-1);
+	if (*tp->content)
+		ft_tp_line(tp, (&(*line)));
+	if ((!tp->size_buf && !*line) || (!*tp->content && !tp->size_buf && *line))
+		return (0);
+	else if (!ft_strchr(*line, '\n'))
+		ft_buffer(fd, tp, &(*line));
+	return (1);
 }
 
 char	*get_next_line(int fd)
 {
-	int			check;
-	char		*str;
-	static char	*chars = NULL;
+	static t_get *tp;
+	char *line;
 
-	check = 0;
-	if (fd < 0 || BUFFER_SIZE <= 0)
+	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
-	if (!chars)
+	if (!tp)
+		tp = (t_get *)ft_calloc(1, sizeof(t_get));
+	if (!tp)
+		return (NULL);
+	line = (NULL);
+	ft_buffer(fd, &(*tp), &line);
+	if (line)
+		return (line);
+	else if ((!line && !((*tp)).size_buf) || (*tp).size_buf < 0)
 	{
-		chars = (char *)malloc(sizeof(char) * 1);
-		if (!chars)
-			return (NULL);
-		chars[0] = '\0';
-	}
-	chars = ft_read_file(chars, fd);
-	str = ft_get_next_line(chars, &check);
-	if (!str)
-	{
-		free(chars);
+		if (tp)
+			free(tp);
+		tp = (NULL);
 		return (NULL);
 	}
-	chars = ft_update_chars(chars, &check);
-	if (!chars)
-		free(chars);
-	return (str);
+	return (line);
 }
+
+// int	main(void)
+// {
+// 	int		fd;
+// 	char *line;
+
+// 	// fd = open("../test/text-copy.txt", O_RDONLY);
+// 	// fd = open("../test/nl", O_RDONLY);
+// 	fd = open("../test/multiple_nl.txt", O_RDONLY);
+// 	// close(fd);
+
+// 	// if (fd == -1)
+// 	// 	return (-1);
+// 	while (1)
+// 	{
+// 		line = get_next_line(fd);
+// 		if (line == NULL)
+// 		{
+// 			line = get_next_line(fd);
+// 			break;
+// 		}
+// 		else if (line)
+// 		{
+// 			printf("%s", line);
+// 			// printf("----------------\n");
+// 			if (line)
+// 				free(line);
+// 		}
+// 	}
+// 	return (1);
+// }
