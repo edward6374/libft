@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/07 10:57:32 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:59:25 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFT_H
 # define LIBFT_H
 
-#include "get_next_line.h"
+# include "get_next_line.h"
 # include "printf.h"
 # include <stdlib.h>
 # include <unistd.h>
@@ -96,5 +96,11 @@ char	*ft_substr(const char *s, unsigned int start, size_t len);
 char	*ft_strmapi(const char *s, char (*f)(unsigned int, char));
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len);
 void	ft_striteri(char *s, void (*f)(unsigned int, char*));
+
+/* ---			Ft_printf			---*/
+int		ft_printf(const char *str, ...);
+
+/* ---			Get_next_line			---*/
+char	*get_next_line(int fd);
 
 #endif

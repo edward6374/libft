@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:30:14 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/07 14:38:47 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 15:00:41 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-void ft_cut_tp(t_get *tp, int len_trim)
+void	ft_cut_tp(t_get *tp, int len_trim)
 {
-	char *str;
-	int len_tp;
+	char	*str;
+	int		len_tp;
 
 	len_tp = ft_strlen(tp->content);
 	str = ft_strjoin(tp->content, "");
@@ -39,9 +39,9 @@ void ft_cut_tp(t_get *tp, int len_trim)
 	free(str);
 }
 
-void ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
+void	ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
 {
-	char *tmp_tp;
+	char	*tmp_tp;
 
 	if (str && *line)
 	{
@@ -64,10 +64,10 @@ void ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
 	ft_cut_tp(tp, len_tp);
 }
 
-int ft_tp_line(t_get *tp, char **line)
+int	ft_tp_line(t_get *tp, char **line)
 {
-	char *str;
-	int len_tp;
+	char	*str;
+	int		len_tp;
 
 	str = ft_strchr(tp->content, '\n');
 	len_tp = str - tp->content + 1;
@@ -91,7 +91,7 @@ int ft_tp_line(t_get *tp, char **line)
 	return (1);
 }
 
-int ft_buffer(int fd, t_get *tp, char **line)
+int	ft_buffer(int fd, t_get *tp, char **line)
 {
 	if (!*tp->content)
 		tp->size_buf = read(fd, tp->content, BUFFER_SIZE);
@@ -108,8 +108,8 @@ int ft_buffer(int fd, t_get *tp, char **line)
 
 char	*get_next_line(int fd)
 {
-	static t_get *tp;
-	char *line;
+	static t_get	*tp;
+	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);
@@ -149,7 +149,7 @@ char	*get_next_line(int fd)
 // 		if (line == NULL)
 // 		{
 // 			line = get_next_line(fd);
-// 			break;
+// 			break ;
 // 		}
 // 		else if (line)
 // 		{
