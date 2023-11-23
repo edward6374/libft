@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/23 11:38:50 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/23 21:12:40 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,5 +99,11 @@ char				*ft_strnstr(const char *haystack, const char *needle,
 						size_t len);
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
 char				*ft_split_join(char **split);
+
+/* ---			Ft_printf			---*/
+int					ft_printf(const char *str, ...);
+
+/* ---			Get_next_line			---*/
+char				*get_next_line(int fd);
 
 #endif

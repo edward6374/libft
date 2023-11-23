@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:32:47 by nmota-bu          #+#    #+#             */
-/*   Updated: 2022/11/30 19:20:10 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/14 14:58:45 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,5 @@ void	ft_cut_tp(t_get *tp, int len_trim);
 void	ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str);
 int		ft_tp_line(t_get *tp, char **line);
 int		ft_buffer(int fd, t_get *tp, char **line);
-char	*get_next_line(int fd);
 
 #endif
