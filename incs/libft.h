@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/14 14:59:25 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 14:48:18 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 
 /* ---			Dptr funcs			--- */
 int		ft_len_dptr(char **arr);
-void	ft_free_dptr(char **arr);
-void	ft_print_dptr(char **arr);
+void ft_free_dptr(char **arr);
+void ft_print_dptr(char **arr, int line);
 char **ft_file_to_dptr(char *file, int line);
 
 /* ---			List funcs			--- */

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:29:05 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 15:21:40 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:00:31 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,7 @@ char **open_file(char *file, char **res, int control, int *write)
 			if (!g_rows)
 				error_empty();
 			if (!res)
-				// res = (char **)ft_calloc(g_rows + 1, sizeof(char *));
-				res = (char **)malloc(g_rows + 1 * sizeof(char *));
+				res = (char **)ft_calloc(g_rows + 1, sizeof(char *));
 			control = TRUE;
 			close(fd);
 			if (*write)
@@ -130,6 +129,9 @@ void free_cur(char **str)
 int main(int n, char **file)
 {
 	char **cur;
+	// char *file = "ft_putuni.c";
+	// char *file = "uno.c";
+	// char *file = "nada.c";
 	int i;
 
 	// para incluir salto de line \n 1, para no 0
