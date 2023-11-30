@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/14 14:59:25 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/11/28 22:24:58 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int		ft_len_dptr(char **arr);
 void	ft_free_dptr(char **arr);
 void	ft_print_dptr(char **arr);
 char **ft_file_to_dptr(char *file, int line);
+char **ft_file_to_dptr_m(int fd);
 
 /* ---			List funcs			--- */
 int		ft_lstsize(t_list *lst);
