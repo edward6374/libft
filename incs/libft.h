@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/09 18:24:15 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/28 22:24:58 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:42:34 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int		ft_strncmp(const char *s1, const char *s2, size_t n);
 /* ---			Dptr funcs			--- */
 int		ft_len_dptr(char **arr);
 void	ft_free_dptr(char **arr);
-void	ft_print_dptr(char **arr);
+void ft_print_dptr(char **arr, int line);
 char **ft_file_to_dptr(char *file, int line);
 char **ft_file_to_dptr_m(int fd);
 
