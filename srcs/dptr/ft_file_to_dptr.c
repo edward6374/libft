@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:29:05 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 15:26:48 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/03 20:19:31 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,7 @@ char **ft_file_to_dptr(char *file, int line)
 }
 
 // ============================================================================
-
+/*
 #include <stdio.h>
 
 void free_cur(char **str)
@@ -147,5 +147,5 @@ int main(int n, char **file)
 
 	// char **tmp = ft_file_to_dptr(file[1], 0);
 }
-
+*/
 // gcc ft_file_to_dptr.c -g3 ../../sources/libft/libft.a

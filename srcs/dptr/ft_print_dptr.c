@@ -6,11 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:45:47 by nmota-bu          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2023/11/30 20:42:07 by nmota-bu         ###   ########.fr       */
-=======
-/*   Updated: 2023/11/28 14:48:35 by nmota-bu         ###   ########.fr       */
->>>>>>> nacho
+/*   Updated: 2023/12/03 20:19:00 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +24,6 @@ void ft_print_dptr(char **arr, int line)
 		printf("%s", arr[i]);
 		if (line)
 			printf("\n");
-<<<<<<< HEAD
-
-=======
->>>>>>> nacho
 		i++;
 	}
 }
