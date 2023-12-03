@@ -3,161 +3,158 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
+/*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/18 17:30:14 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/14 15:00:41 by vduchi           ###   ########.fr       */
+/*   Created: 2023/11/28 13:57:52 by nmota-bu          #+#    #+#             */
+/*   Updated: 2023/11/28 14:32:43 by nmota-bu         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/* ╔════════════════════════════════════════════════════════════════════════╗ */
-/* ║                 https://github.com/nach131/42Barcelona                 ║ */
-/* ╚════════════════════════════════════════════════════════════════════════╝ */
+#include <unistd.h>
+#include <stdlib.h>
 
-#include "get_next_line.h"
-#include "libft.h"
+#ifndef BUFFER_SIZE
+#define BUFFER_SIZE 42
+#endif
 
-void	ft_cut_tp(t_get *tp, int len_trim)
+int ft_strlen_p(char *str)
 {
-	char	*str;
-	int		len_tp;
-
-	len_tp = ft_strlen(tp->content);
-	str = ft_strjoin(tp->content, "");
-	while (len_tp >= 0)
-	{
-		tp->content[len_tp] = '\0';
-		len_tp--;
-	}
-	len_tp = 0;
-	while (str[len_trim] != '\0')
-	{
-		tp->content[len_tp] = str[len_trim];
-		len_trim++;
-		len_tp++;
-	}
-	free(str);
+	int i = 0;
+	while (str && str[i])
+		i++;
+	return i;
 }
 
-void	ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
+char *ft_strjoin_p(char *s1, char *s2)
 {
-	char	*tmp_tp;
 
-	if (str && *line)
+	int i = 0, j = 0;
+	char *res;
+
+	if (!(res = malloc(ft_strlen_p(s1) + ft_strlen_p(s2) + 1)))
+		return (NULL);
+	if (s1)
 	{
-		tmp_tp = (char *)ft_calloc(len_tp, sizeof(tmp_tp));
-		ft_memcpy(tmp_tp, tp->content, len_tp);
-		str = ft_strjoin(*line, "");
-		free(*line);
-		*line = ft_strjoin(str, tmp_tp);
-		free(tmp_tp);
-		free(str);
+		while (s1[i])
+			res[j++] = s1[i++];
+		free(s1);
+	}
+	i = 0;
+	while (s2[i])
+		res[j++] = s2[i++];
+	res[j] = '\0';
+	return (res);
+}
+
+char *push_line(char *resto)
+{
+	int i;
+	char *result;
+
+	i = 0;
+	while (resto[i] && resto[i] != '\n')
+		i++;
+	if (resto[i] == '\n')
+		i++;
+	if (!(result = malloc((i + 1))))
+		return (NULL);
+	i = 0;
+	while (resto[i] && resto[i] != '\n')
+	{
+		result[i] = resto[i];
+		i++;
+	}
+	if (resto[i] == '\n')
+	{
+		result[i] = '\n';
+		result[i + 1] = '\0';
+		return (result);
 	}
 	else
-	{
-		len_tp = ft_strlen(tp->content);
-		str = ft_strjoin(*line, "");
-		free(*line);
-		*line = ft_strjoin(str, tp->content);
-		free(str);
-	}
-	ft_cut_tp(tp, len_tp);
+		result[i] = '\0';
+	return (result);
 }
 
-int	ft_tp_line(t_get *tp, char **line)
+char *cut_line(char *resto)
 {
-	char	*str;
-	int		len_tp;
+	int i = 0, j = 0;
+	char *res;
 
-	str = ft_strchr(tp->content, '\n');
-	len_tp = str - tp->content + 1;
-	if (str && !*line)
+	while (resto[i] && resto[i] != '\n')
+		i++;
+	if (!resto[i])
 	{
-		str = (char *)ft_calloc(len_tp, sizeof(str));
-		ft_memcpy(str, tp->content, len_tp);
-		ft_cut_tp(tp, len_tp);
-		*line = str;
-	}
-	else if (str && *line)
-		ft_tp_line_ex(tp, &(*line), len_tp, str);
-	else if (*tp->content && *line != NULL)
-		ft_tp_line_ex(tp, &(*line), len_tp, str);
-	else
-	{
-		len_tp = ft_strlen(tp->content);
-		*line = ft_strjoin(tp->content, "");
-		ft_cut_tp(tp, len_tp);
-	}
-	return (1);
-}
-
-int	ft_buffer(int fd, t_get *tp, char **line)
-{
-	if (!*tp->content)
-		tp->size_buf = read(fd, tp->content, BUFFER_SIZE);
-	if (tp->size_buf < 0)
-		return (-1);
-	if (*tp->content)
-		ft_tp_line(tp, (&(*line)));
-	if ((!tp->size_buf && !*line) || (!*tp->content && !tp->size_buf && *line))
-		return (0);
-	else if (!ft_strchr(*line, '\n'))
-		ft_buffer(fd, tp, &(*line));
-	return (1);
-}
-
-char	*get_next_line(int fd)
-{
-	static t_get	*tp;
-	char			*line;
-
-	if (fd < 0 || BUFFER_SIZE < 1)
-		return (NULL);
-	if (!tp)
-		tp = (t_get *)ft_calloc(1, sizeof(t_get));
-	if (!tp)
-		return (NULL);
-	line = (NULL);
-	ft_buffer(fd, &(*tp), &line);
-	if (line)
-		return (line);
-	else if ((!line && !((*tp)).size_buf) || (*tp).size_buf < 0)
-	{
-		if (tp)
-			free(tp);
-		tp = (NULL);
+		free(resto);
 		return (NULL);
 	}
-	return (line);
+	if (!(res = malloc((ft_strlen_p(resto) - i + 1))))
+		return (NULL);
+	i++;
+	while (resto[i])
+		res[j++] = resto[i++];
+	res[j] = '\0';
+	free(resto);
+	return (res);
 }
 
-// int	main(void)
+int is_line(char *buffer)
+{
+	int i = 0;
+
+	while (buffer[i])
+	{
+		if (buffer[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
+char *get_next_line(int fd)
+{
+	char buffer[BUFFER_SIZE + 1] = {0};
+	static char *resto = NULL;
+	char *line = NULL;
+	int rd = 1;
+
+	while (!is_line(buffer) && rd != 0)
+	{
+		if ((rd = read(fd, buffer, BUFFER_SIZE)) < 0)
+		{
+			if (resto)
+			{
+				free(resto);
+				resto = NULL;
+			}
+			return NULL;
+		}
+		buffer[rd] = '\0';
+		resto = ft_strjoin_p(resto, buffer);
+	}
+
+	line = push_line(resto);
+	resto = cut_line(resto);
+
+	if (!line || line[0] == '\0')
+	{
+		free(line);
+		return NULL;
+	}
+
+	return line;
+}
+
+// #include <fcntl.h>
+// #include <stdio.h>
+
+// int main(int n, char **file)
 // {
-// 	int		fd;
-// 	char *line;
-
-// 	// fd = open("../test/text-copy.txt", O_RDONLY);
-// 	// fd = open("../test/nl", O_RDONLY);
-// 	fd = open("../test/multiple_nl.txt", O_RDONLY);
-// 	// close(fd);
-
-// 	// if (fd == -1)
-// 	// 	return (-1);
-// 	while (1)
+// 	int fd = open(file[1], O_RDONLY);
+// 	char *line = get_next_line(fd);
+// 	while (line)
 // 	{
+// 		printf("%s", line);
+// 		free(line);
 // 		line = get_next_line(fd);
-// 		if (line == NULL)
-// 		{
-// 			line = get_next_line(fd);
-// 			break ;
-// 		}
-// 		else if (line)
-// 		{
-// 			printf("%s", line);
-// 			// printf("----------------\n");
-// 			if (line)
-// 				free(line);
-// 		}
 // 	}
-// 	return (1);
 // }
