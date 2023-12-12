@@ -6,32 +6,28 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 13:57:52 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 14:32:43 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:48:51 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include <stdlib.h>
+#include "libft.h"
 
 #ifndef BUFFER_SIZE
-#define BUFFER_SIZE 42
+# define BUFFER_SIZE 42
 #endif
 
-int ft_strlen_p(char *str)
+char	*ft_strjoin_p(char *s1, char *s2)
 {
-	int i = 0;
-	while (str && str[i])
-		i++;
-	return i;
-}
+	int		i;
+	int		j;
+	char	*res;
 
-char *ft_strjoin_p(char *s1, char *s2)
-{
-
-	int i = 0, j = 0;
-	char *res;
-
-	if (!(res = malloc(ft_strlen_p(s1) + ft_strlen_p(s2) + 1)))
+	i = 0;
+	j = 0;
+	res = malloc((int)ft_strlen(s1) + (int)ft_strlen(s2) + 1);
+	if (!res)
 		return (NULL);
 	if (s1)
 	{
@@ -46,24 +42,22 @@ char *ft_strjoin_p(char *s1, char *s2)
 	return (res);
 }
 
-char *push_line(char *resto)
+char	*push_line(char *resto)
 {
-	int i;
-	char *result;
+	int		i;
+	char	*result;
 
 	i = 0;
 	while (resto[i] && resto[i] != '\n')
 		i++;
 	if (resto[i] == '\n')
 		i++;
-	if (!(result = malloc((i + 1))))
+	result = malloc(sizeof(char) * (i + 1));
+	if (!result)
 		return (NULL);
-	i = 0;
-	while (resto[i] && resto[i] != '\n')
-	{
+	i = -1;
+	while (resto[++i] && resto[i] != '\n')
 		result[i] = resto[i];
-		i++;
-	}
 	if (resto[i] == '\n')
 	{
 		result[i] = '\n';
@@ -75,11 +69,14 @@ char *push_line(char *resto)
 	return (result);
 }
 
-char *cut_line(char *resto)
+char	*cut_line(char *resto)
 {
-	int i = 0, j = 0;
-	char *res;
+	int		i;
+	int		j;
+	char	*res;
 
+	i = 0;
+	j = 0;
 	while (resto[i] && resto[i] != '\n')
 		i++;
 	if (!resto[i])
@@ -87,7 +84,8 @@ char *cut_line(char *resto)
 		free(resto);
 		return (NULL);
 	}
-	if (!(res = malloc((ft_strlen_p(resto) - i + 1))))
+	res = malloc(((int)ft_strlen(resto) - i + 1));
+	if (!res)
 		return (NULL);
 	i++;
 	while (resto[i])
@@ -97,10 +95,11 @@ char *cut_line(char *resto)
 	return (res);
 }
 
-int is_line(char *buffer)
+int	is_line(char *buffer)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	while (buffer[i])
 	{
 		if (buffer[i] == '\n')
@@ -110,38 +109,32 @@ int is_line(char *buffer)
 	return (0);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char buffer[BUFFER_SIZE + 1] = {0};
-	static char *resto = NULL;
-	char *line = NULL;
-	int rd = 1;
+	int			rd;
+	char		*line;
+	static char	*resto = NULL;
+	char		buffer[BUFFER_SIZE + 1];
 
+	rd = 1;
+	line = NULL;
+	ft_bzero(buffer, BUFFER_SIZE + 1);
 	while (!is_line(buffer) && rd != 0)
 	{
-		if ((rd = read(fd, buffer, BUFFER_SIZE)) < 0)
-		{
-			if (resto)
-			{
-				free(resto);
-				resto = NULL;
-			}
-			return NULL;
-		}
+		rd = read(fd, buffer, BUFFER_SIZE);
+		if (rd < 0)
+			return (ft_free_ptr(&resto));
 		buffer[rd] = '\0';
 		resto = ft_strjoin_p(resto, buffer);
 	}
-
 	line = push_line(resto);
 	resto = cut_line(resto);
-
 	if (!line || line[0] == '\0')
 	{
 		free(line);
-		return NULL;
+		return (NULL);
 	}
-
-	return line;
+	return (line);
 }
 
 // #include <fcntl.h>

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/14 11:29:05 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/03 20:19:31 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:53:36 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,13 @@
 #define MSG_DAN_0 "File not found"
 #define MSG_DAN_1 "File is empty"
 
-int static g_rows;
-int g_line;
+int			g_line;
+int static	g_rows;
 
-void static is_line(char *line, char **res, int control, int *write)
+static void	is_line(char *line, char **res, int control, int *write)
 {
-	int static i = 0;
-	int len;
+	int			len;
+	int static	i = 0;
 
 	if (control == FALSE)
 		g_rows += 1;
@@ -52,7 +52,7 @@ void static is_line(char *line, char **res, int control, int *write)
 	}
 }
 
-void static error_file(int fd)
+static void	error_file(int fd)
 {
 	if (fd < 0)
 	{
@@ -61,16 +61,16 @@ void static error_file(int fd)
 	}
 }
 
-void static error_empty(void)
+static void	error_empty(void)
 {
 	ft_message(DANGER, MSG_DAN_1);
 	exit(EXIT_FAILURE);
 }
 
-char **open_file(char *file, char **res, int control, int *write)
+char	**open_file(char *file, char **res, int control, int *write)
 {
-	int fd;
-	char *line;
+	int		fd;
+	char	*line;
 
 	fd = open(file, O_RDONLY);
 	error_file(fd);
@@ -82,7 +82,6 @@ char **open_file(char *file, char **res, int control, int *write)
 			if (!g_rows)
 				error_empty();
 			if (!res)
-				// res = (char **)ft_calloc(g_rows + 1, sizeof(char *));
 				res = (char **)malloc(g_rows + 1 * sizeof(char *));
 			control = TRUE;
 			close(fd);
@@ -96,11 +95,11 @@ char **open_file(char *file, char **res, int control, int *write)
 	}
 }
 
-char **ft_file_to_dptr(char *file, int line)
+char	**ft_file_to_dptr(char *file, int line)
 {
-	char **res;
-	int control;
-	int write;
+	int		write;
+	int		control;
+	char	**res;
 
 	g_line = line;
 	g_rows = 0;

@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 20:48:58 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/07 14:38:04 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:51:06 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@
 #include "printf.h"
 #include "libft.h"
 
-void ft_message(int err, char *msg)
+void	ft_message(int err, char *msg)
 {
-	char *str;
+	char	*str;
 
 	if (err == DANGER)
 	{
@@ -29,7 +29,6 @@ void ft_message(int err, char *msg)
 		write(STDERR_FILENO, str, ft_strlen(str));
 		free(str);
 	}
-
 	else if (err == WARNING)
 		ft_printf(YELLOW "%s", msg);
 	else if (err == INFO)

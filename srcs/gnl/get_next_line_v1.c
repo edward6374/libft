@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/18 17:30:14 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 14:31:08 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:50:11 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 #include "get_next_line.h"
 #include "libft.h"
 
-void ft_cut_tp(t_get *tp, int len_trim)
+void	ft_cut_tp(t_get *tp, int len_trim)
 {
-	char *str;
-	int len_tp;
+	int		len_tp;
+	char	*str;
 
 	len_tp = ft_strlen(tp->content);
 	str = ft_strjoin(tp->content, "");
@@ -39,9 +39,9 @@ void ft_cut_tp(t_get *tp, int len_trim)
 	free(str);
 }
 
-void ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
+void	ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
 {
-	char *tmp_tp;
+	char	*tmp_tp;
 
 	if (str && *line)
 	{
@@ -64,10 +64,10 @@ void ft_tp_line_ex(t_get *tp, char **line, int len_tp, char *str)
 	ft_cut_tp(tp, len_tp);
 }
 
-int ft_tp_line(t_get *tp, char **line)
+int	ft_tp_line(t_get *tp, char **line)
 {
-	char *str;
-	int len_tp;
+	int		len_tp;
+	char	*str;
 
 	str = ft_strchr(tp->content, '\n');
 	len_tp = str - tp->content + 1;
@@ -91,7 +91,7 @@ int ft_tp_line(t_get *tp, char **line)
 	return (1);
 }
 
-int ft_buffer(int fd, t_get *tp, char **line)
+int	ft_buffer(int fd, t_get *tp, char **line)
 {
 	if (!*tp->content)
 		tp->size_buf = read(fd, tp->content, BUFFER_SIZE);
@@ -106,10 +106,10 @@ int ft_buffer(int fd, t_get *tp, char **line)
 	return (1);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	static t_get *tp;
-	char *line;
+	char			*line;
+	static t_get	*tp;
 
 	if (fd < 0 || BUFFER_SIZE < 1)
 		return (NULL);

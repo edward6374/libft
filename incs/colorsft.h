@@ -6,12 +6,12 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 00:37:54 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/09/11 18:33:22 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:58:32 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef COLORSFT_H
+# define COLORSFT_H
 
 # define RESET "\x1B[0m"
 
@@ -97,7 +97,8 @@
 
 // \x1B es la secuencia de escape ANSI.
 // [3m activa el formato de texto en cursiva.
-// [38;2;255;165;0m establece el color utilizando el modelo de color RGB para obtener naranja.
+// [38;2;255;165;0m establece el color utilizando el modelo
+// de color RGB para obtener naranja.
 
 // \x1B[38;2;0;0;255m // para testo regular
 

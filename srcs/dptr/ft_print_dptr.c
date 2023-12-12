@@ -6,13 +6,13 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 18:45:47 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/12/03 20:19:00 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:50:44 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_print_dptr(char **arr, int line)
+void	ft_print_dptr(char **arr, int line)
 {
 	int	i;
 

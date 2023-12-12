@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:00:55 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/23 11:35:19 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:26:08 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 
 #include "libft.h"
 
-char *ft_split_join(char **split)
+char	*ft_split_join(char **split)
 {
-	int i;
-	char *res;
+	int		i;
+	char	*res;
 
 	i = 0;
 	res = NULL;

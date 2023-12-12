@@ -6,12 +6,12 @@
 /*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:28:03 by vduchi            #+#    #+#             */
-/*   Updated: 2023/11/14 14:59:19 by vduchi           ###   ########.fr       */
+/*   Updated: 2023/12/12 12:58:55 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#ifndef PRINTF_H
+# define PRINTF_H
 
 # include <stdio.h>
 # include <stdarg.h>

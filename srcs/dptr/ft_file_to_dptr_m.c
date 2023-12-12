@@ -6,7 +6,7 @@
 /*   By: nmota-bu <nmota-bu@student.42barcel>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/28 21:39:31 by nmota-bu          #+#    #+#             */
-/*   Updated: 2023/11/28 22:31:21 by nmota-bu         ###   ########.fr       */
+/*   Updated: 2023/12/12 12:54:08 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@
 
 #include "libft.h"
 
-char **ft_file_to_dptr_m(int fd)
+char	**ft_file_to_dptr_m(int fd)
 {
-	char **lines;
-	char *line;
-	size_t line_count;
+	char	**lines;
+	char	*line;
+	size_t	line_count;
 
 	lines = NULL;
 	line_count = 0;
@@ -29,7 +29,7 @@ char **ft_file_to_dptr_m(int fd)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			break;
+			break ;
 		lines = realloc(lines, (line_count + 1) * sizeof(char *));
 		lines[line_count] = line;
 		line_count++;

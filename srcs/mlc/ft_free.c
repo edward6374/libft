@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vduchi <vduchi@student.42barcelon>         +#+  +:+       +#+        */
+/*   By: vduchi <vduchi@student.42barcelona.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/09 23:33:32 by vduchi            #+#    #+#             */
-/*   Updated: 2023/12/12 12:48:00 by vduchi           ###   ########.fr       */
+/*   Created: 2023/12/12 12:38:05 by vduchi            #+#    #+#             */
+/*   Updated: 2023/12/12 12:42:43 by vduchi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlen(const char *s)
+char	*ft_free_ptr(char **str)
 {
-	size_t	i;
-
-	i = 0;
-	while (s && s[i])
-		i++;
-	return (i);
+	if (*str)
+	{
+		free(*str);
+		*str = NULL;
+	}
+	return (NULL);
 }
